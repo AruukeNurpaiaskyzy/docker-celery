@@ -1,0 +1,23 @@
+# version: '3.8'
+
+# services:
+#   django:
+#     container_name: django
+#     build:
+#       context: .  # Убедитесь, что контекст указан внутри build
+#     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]  # Убедитесь, что порт указан правильно
+#     volumes:
+#       - ./dcelery:/usr/src/app/
+#     ports:
+#       - "8001:8000"  # Пробел перед числом и кавычки
+#     environment:
+#       - DEBUG=1
+#       - SECRET_KEY=074476yrfbyuh
+#       - ALLOWED_HOSTS=localhost,127.0.0.1
+version: '3.8'
+services:
+  django:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    entrypoint: /usr/src/app/entrypoint.sh
