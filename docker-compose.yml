@@ -14,10 +14,27 @@
 #       - DEBUG=1
 #       - SECRET_KEY=074476yrfbyuh
 #       - ALLOWED_HOSTS=localhost,127.0.0.1
-version: '3.8'
+# version: '3.8'
+# redis:
+#   image:redis: 7.0.11-alpine
+  
+# services:
+#   django:
+#     build: .
+#     volumes:
+#       - .:/usr/src/app
+#     entrypoint: /usr/src/app/entrypoint.sh
+
 services:
+  redis:
+    image: redis:7.0.11-alpine
+    ports:
+      - "6379:6379"  # Опционально: если нужно открыть порт для доступа к Redis
+
   django:
     build: .
     volumes:
       - .:/usr/src/app
     entrypoint: /usr/src/app/entrypoint.sh
+    depends_on:
+      - redis  # Указываем, что Django зависит от Redis
